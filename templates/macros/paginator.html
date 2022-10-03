@@ -1,0 +1,28 @@
+{% macro render(paginator)%}
+  {% if paginator.number_pagers > 1 %}
+  <nav>
+    <ul class="pagination">
+  {% endif %}
+
+  {% if paginator.current_index > 1 %}
+        <a class="page-link" href="{{ paginator.first }}">« </a>
+  {% endif %}
+  
+  {% if paginator.current_index > 1 %}
+        <a class="page-link" href="{{ paginator.previous }}"> {{ paginator.current_index - 1 }} </a>
+  {% endif %}
+
+  {% if paginator.number_pagers > 1 %}
+	<a class="page-link" style="background: #ff6111 !important; color: #f2f2f2" href="">{{ paginator.current_index }}</a>
+  {% endif %}
+  	
+  {% if paginator.current_index < paginator.number_pagers %}
+        <a class="page-link" href="{{ paginator.next}}"> {{ paginator.current_index + 1 }} </a>
+  {% endif %}
+  
+  {% if paginator.current_index + 1< paginator.number_pagers %}
+        <a class="page-link" href="{{ paginator.last }}"> »</a>
+  {% endif %}
+    </ul>
+  
+{% endmacro %}

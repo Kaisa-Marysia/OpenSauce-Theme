@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% import "macros/post.html" as post %}
+{% import "macros/posts.html" as posts %}
+{% import "macros/paginator.html" as paginator %}
+{% import "macros/header.html" as header %}
+
+{% block content %}
+
+  {% for row in section.extra.home | default(value=[]) %}
+    <div class="row">
+      {% for item in row %}
+        <div class="col-md-{{item.size}}">
+            {% set articles = get_section(path=item.section~"_index.md") %}
+            {% set type = item.type | default(value='default') %}
+              {% set pages = articles.pages | slice(start=item.start, end=item.end) %}
+              {% set row = item.row | default(value=0) %}
+              {{posts::render(pages=pages, type=type, row=row)}}
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+
+  {% if section.title %}
+    <h1 class="px-3">{{section.title}}</h1>
+  {% endif %}
+  {% if section.description %}
+    <p class="px-3 text-muted">{{section.description}}</p>
+  {% endif %}
+  {% if section.content %}
+    <div class="content px-3">{{section.content | safe}}</div>
+  {% endif %}
+	{% for page in paginator.pages %}
+    {{post::render(page=page)}}
+	{% endfor %}
+  {{paginator::render(paginator=paginator)}}
+
+{% endblock %}
+
+
+

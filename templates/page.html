@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% import "macros/authors.html" as authors %}
+{% import "macros/authorbox.html" as authorbox %}
+
+{% block title %}{{page.title}} | {{config.title}}{% endblock %}
+
+{% block content %}
+  <h1>{{page.title}}</h1>
+  <p class="text-muted">
+    {{authors::render(page=page)}}
+  </p>
+  <div class="content">
+    {{page.content | safe}}
+  </div>
+  {% if page.taxonomies.tags %}
+  <div class="singleposttags">
+  <p>
+    {% for tag in page.taxonomies.tags %}
+      <a
+        href="{{get_taxonomy_url(kind="tags", name=tag)}}"
+        class="badge bg-dark text-decoration-none link-light me-1"
+      >
+        {{tag}}
+      </a>
+    {% endfor %}
+  </p>
+  </div>
+  </p>
+ 
+  {% endif %}
+{% endblock %}
+
