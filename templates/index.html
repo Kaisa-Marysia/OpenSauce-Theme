@@ -5,7 +5,6 @@
 {% import "macros/header.html" as header %}
 
 {% block content %}
-
   {% for row in section.extra.home | default(value=[]) %}
     <div class="row">
       {% for item in row %}

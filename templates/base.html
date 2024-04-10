@@ -164,9 +164,9 @@
       <div class="mt-2">
         <span class="copyleft"> Copyleft by {{config.title}} | </span>
         {% for icon in config.extra.icons %}
-          <a
+          <a rel="me"
+            href="{{ icon.url | urlencode_strict |safe| replace(from="%3A", to=":")| replace(from="%40", to="@")| replace(from="%2F", to="/")| replace(from="%2E", to=".") | replace(from="%2D", to="-") | safe }}"
             class="text-reset mx-1 bg-transparent"
-            href="{{icon.url}}"
             {% if icon.title %}title="{{icon.title}}"{% endif %}
           ><img src="{{config.base_url}}img/{{icon.icon}}.svg" style="width: 15px; filter: invert(75%)" alt="Socialmedia Icon for {{icon.icon}}"</img></a>
         {% endfor %}
